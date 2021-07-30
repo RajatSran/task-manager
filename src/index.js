@@ -6,7 +6,7 @@ const Task = require('./models/task')
 const app = express()
 const port = process.env.PORT || 3000
 
-app.use(express.json())
+app.use(express.json())//allows to use json in application
 
 app.post('/users', (req, res) => {
     const user = new User(req.body)
@@ -56,12 +56,10 @@ app.get('/tasks', (req, res) => {
 
 app.get('/tasks/:id', (req, res) => {
     const _id = req.params.id
-
     Task.findById(_id).then((task) => {
         if (!task) {
             return res.status(404).send()
         }
-
         res.send(task)
     }).catch((e) => {
         res.status(500).send()
@@ -71,3 +69,8 @@ app.get('/tasks/:id', (req, res) => {
 app.listen(port, () => {
     console.log('server is running on port' + port)
 })
+
+
+/*
+ /Users/rajatsran27gmail.com/Desktop/React/mongodb/bin/mongod --dbpath=/Users/rajatsran27gmail.com/Desktop/React/mongodb-data
+*/
